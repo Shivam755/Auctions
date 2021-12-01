@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 class="page-title">Active Listings</h2>
+    <div id="content">
+    {% for listing in listings%}
+        <div class="contain">
+            <img class="img" src={{listing.image_link}} alt={{listing.title}}>
+            <a class="list-link" href={% url 'listingPage' name=listing.title%}><h3>{{listing.title}}</h3></a>
+            <small class="list-owner"><b>Owner:</b> {{listing.owner.username}}</small>
+            <small class="list-owner"><b>description:</b> {{listing.description}}</small>
+            {% if listing.max_bid == 0 %}
+            <small class="list-owner"><b>Current-price:</b> {{listing.start_bid}}</small>
+            {% else %}
+            <small class="list-owner"><b>Current-price:</b> {{listing.max_bid}}</small>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

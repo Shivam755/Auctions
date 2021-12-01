@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{%block title %}Watchlist{%endblock%}
+
+{% block body %}
+    <h2 class='page-title'>Watchlist of {{user.username}}</h2>
+    <div id="content">
+    {% for watchlist in watchlist%}
+        <div class="contain">
+            <img class="img" src={{watchlist.listing.image_link}} alt={{watchlist.listing.title}}>
+            <a class="list-link" href={% url 'listingPage' name=watchlist.listing.title%}><h3>{{watchlist.listing.title}}</h3></a>
+            <small class="list-owner">{{watchlist.listing.owner.username}}</small>
+        </div>
+    {% empty %}
+        <h4>No listing added to your watchlist!</h4>
+    {% endfor %}
+    </div>
+{% endblock %}

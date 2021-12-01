@@ -1,0 +1,308 @@
+$whiteish: #e2f3f5;
+$light-bluish: #22d1ee;
+$dark-bluish: #3d5af1;
+$blackish: #0e153a;
+$error-red: #ff304f;
+$error-back: #fdc6ce;
+$success-green: #00c000;
+$success-back: #bcf5a6;
+// $btn-col: #8348ff;
+
+body {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  background-color: $whiteish;
+  font-family: "Nunito";
+}
+//heading part of page
+#head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $dark-bluish;
+  color: $whiteish;
+  #title {
+    display: flex;
+    justify-content: space-between;
+    flex: 70%;
+    padding-left: 2vw;
+  }
+  #Site-name {
+    font-size: 3.5vw;
+  }
+  #user {
+    padding-right: 2vw;
+    padding-top: 2vw;
+    font-size: 2vw;
+  }
+  .nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 1vw;
+    font-size: 1.5vw;
+    .nav-item {
+      padding: 1vw;
+      border-radius: 0.3vw;
+      display: inline-block;
+      background-clip: border-box;
+      color: $whiteish;
+      .nav-link {
+        text-decoration: none;
+        color: inherit;
+        outline: none;
+      }
+      &:hover {
+        text-decoration: underline;
+        background-color: $light-bluish;
+        color: $blackish;
+      }
+    }
+  }
+}
+h3 {
+  color: $dark-bluish;
+  font-size: 2vw;
+}
+//common page styling for all pages
+#page {
+  display: flex;
+  min-height: 72.5vh;
+  padding: 5vh 0vw;
+  flex-direction: column;
+  align-items: center;
+  .page-title {
+    color: $blackish;
+    font-size: 5vw;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: $dark-bluish;
+  font-size: 1.5vw;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.error {
+  border-radius: 0.4vw;
+  padding: 1vw;
+  border: 0.1vw solid $error-red;
+  color: $error-red;
+  box-shadow: 0.2vw 0.2vw 0.8vw 0.2vw $error-back;
+  background-color: $error-back;
+}
+.success {
+  border-radius: 0.4vw;
+  padding: 1vw;
+  border: 0.1vw solid $success-green;
+  color: $success-green;
+  box-shadow: 0.2vw 0.2vw 0.8vw 0.2vw $success-back;
+  background-color: $success-back;
+}
+// login and register pages
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1vw;
+}
+.create-form {
+  @extend .form;
+  width: 100vw;
+  max-width: 100%;
+  .text {
+    width: 90%;
+  }
+  .btn {
+    width: 90%;
+  }
+}
+.btn {
+  outline: none;
+  width: fit-content;
+  font-size: 1.4vw;
+  padding: 0.7vw 1.2vw;
+  margin: 3vh 0vh;
+  border: none;
+  border-radius: 0.5vw;
+  color: $whiteish;
+  background-color: $dark-bluish;
+  &:hover {
+    cursor: pointer;
+    transform: translate(0vw, -0.5vw);
+  }
+  &:active {
+    transform: translate(0vw, 0.2vw);
+  }
+}
+.text {
+  // min-width: 30vw;
+  padding: 0.5vw 0.9vw;
+  margin: 0.4vw;
+  outline: none;
+  border: none;
+  border-radius: 0.5vw;
+  font-size: 1.4vw;
+  color: $blackish;
+  border: 0.1vw solid $blackish;
+  &:focus {
+    color: $dark-bluish;
+    border: 0.3vw solid $dark-bluish;
+  }
+}
+// showing the various listings
+#content {
+  width: 100vw;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .contain {
+    padding: 1vw;
+    margin: 1vw;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 0.5vw;
+    background: linear-gradient(
+      to right,
+      lightgrey 0%,
+      lightgrey 1%,
+      rgb(224, 224, 224) 26%,
+      rgb(239, 239, 239) 48%,
+      rgb(217, 217, 217) 75%,
+      rgb(188, 188, 188) 100%
+    );
+    border: 0.1vw solid rgba(156, 156, 156, 0.774);
+    box-shadow: 0.3vw 0.3vw 0.6vw 0.2vw rgba(156, 156, 156, 0.774);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    .img {
+      max-height: 30vw;
+      border-radius: 1vw;
+    }
+    .list-link {
+      text-decoration: none;
+      color: $dark-bluish;
+      font-size: 1.5vw;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+    .list-owner {
+      font-size: 1.3vw;
+      color: $blackish;
+    }
+  }
+}
+//showCategories page
+#categories {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+  width: 100vw;
+  max-width: 100%;
+  .category {
+    padding: 1vw 1.8vw;
+    margin: 1vw 1.8vw;
+    color: $dark-bluish;
+    .cat-link {
+      color: inherit;
+      text-decoration: none;
+      font-size: 2vw;
+      &:hover {
+        text-decoration: underline;
+        font-weight: 900;
+        text-shadow: 0.1vw 0.1vw rgba(156, 156, 156, 0.774);
+      }
+    }
+  }
+}
+
+//listing page
+#container {
+  display: grid;
+  // justify-items: center;
+  // align-items: start;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-auto-rows: 3fr;
+  grid-template-rows: 1fr;
+  gap: 1vw;
+  grid-template-areas:
+    ". main watch ."
+    ". main bid . "
+    ". comment comment .";
+
+  #main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+  }
+  .value {
+    font-size: 1.5vw;
+    margin: 0;
+  }
+  #img {
+    border-radius: 1vw;
+    min-width: 50vw;
+    max-width: 70vw;
+    margin: 1vw 3vw;
+  }
+  #watchlist {
+    grid-area: watch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #bid {
+    grid-area: bid;
+    min-width: 15vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #comment {
+    grid-area: comment;
+    color: $blackish;
+    .comment {
+      margin: 1vw;
+      border-radius: 0.5vw;
+      // border-bottom: 0.1vw solid $blackish;
+      // border-top: 0.1vw solid $blackish;
+      box-shadow: 0.3vw 0.3vw 0.6vw 0.2vw rgba(156, 156, 156, 0.774);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    sub {
+      align-self: flex-end;
+      padding-right: 1vw;
+      padding-bottom: 1vw;
+    }
+    p {
+      align-self: center;
+      font-size: 1.2vw;
+      color: $blackish;
+    }
+    h5 {
+      font-size: 1.5vw;
+      padding-left: 1vw;
+      margin: 0.5vw;
+    }
+  }
+}

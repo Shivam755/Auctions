@@ -1,0 +1,18 @@
+{% extends 'auctions/layout.html'%}
+
+{%block title %}{{category.title}}{%endblock%}
+
+{% block body %}
+    <h2 class='page-title'>{{category.title}} Listings</h2>
+    <div id="content">
+    {% for listing in listings%}
+        <div class="contain">
+            <img class="img" src={{listing.image_link}} alt={{listing.title}}>
+            <a class="list-link" href={% url 'listingPage' name=listing.title%}><h3>{{listing.title}}</h3></a>
+            <small class="list-owner">{{listing.owner.username}}</small>
+        </div>
+    {% empty %}
+        <h1>No listings availabe in this category!!</h1>
+    {% endfor %}
+    </div>
+{% endblock %}

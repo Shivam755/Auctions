@@ -1,0 +1,99 @@
+{% extends "auctions/layout.html" %}
+
+{%block title %}{{listing.title}}{%endblock%}
+
+{% block body %}
+    <h1 class='page-title'>{{listing.title}}</h1>
+    {% if listing.buyer != None %}
+        {% if user == listing.buyer%}
+            <h3 class="success">Congratulations you've won the auction for this listing!!!!!</h3>
+        {% else %}
+            <h3 class="error">This listing is closed and the winner is {{listing.buyer.username}}</h3>
+        {% endif %}
+    {% endif %}
+    <div id="container">
+        <div id="main">
+            <img id="img" src={{listing.image_link}} alt={{listing.title}}>
+            <div class="des">
+                <h3>Description: </h3>
+                <p class="value">{{listing.description}}</p>
+            </div>
+        <!-- </div>
+        <div id="details"> -->
+            <div class="details">
+                <h3>Details</h3>
+                <p class="value">Created by: {{listing.owner.username}}</p>
+                <p class="value">Created on: {{listing.open_date}}</p>
+                <p class="value">Category: {{listing.category}}</p>
+            </div>
+        </div>
+        <!-- Watchlist -->
+        {% if user.is_authenticated %}
+        <form id="watchlist" action={% url 'changeWatchlist' name=listing.title %} method='POST'>
+            {%csrf_token%}
+            <input type="hidden" name="listing" value={{listing.title}}>
+            {% if watchlist%}
+            <input class='btn' type="submit" value="Remove from Watchlist">
+            {%else%}
+            <input class='btn' type="submit" value="Add to Watchlist">
+            {%endif%}
+        </form>
+        {%endif%}
+        <!-- Bidding Section -->
+        <div id="bid">
+            <h3>Bidding Section</h3>
+            <div class="value">Start-bid: {{listing.start_bid}}</div>
+            <div class="value">Max-bid: {{listing.max_bid}}</div>
+        
+            <!-- Section for displaying contents if user is logged in -->
+            {% if user.is_authenticated and listing.buyer == None %}
+                <!-- Seciton to be displayed if the user created this listing -->
+                {% if user == listing.owner %}
+                    <form action={% url 'closeListing' name=listing.title %} method='POST'>
+                        {% csrf_token%}
+                        <input class='btn' type="submit" value="Close">
+                    </form>
+                {%else%}
+                <!-- Section to be displayed if the user didn't create this listing -->
+                    {% if message %}
+                        {% if success%}
+                        <span class='success'>{{message}}</span>
+                        {% else %}
+                        <span class='error'>{{message}}</span>
+                        {% endif %}
+                        
+                    {%endif%}
+                <form class='form' action={% url 'listingPage' name=listing.title %} method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="user" value={{user}}>
+                    <input class="text" type="number" name="Amount" id="amount" placeholder="Amount in Rupees">
+                    <input class='btn' type="submit" value="Bid">
+                </form>
+                {%endif%}
+            {% endif %}
+        </div>
+        <!-- Comment section -->
+        <div id="comment">
+            <h3>Comments</h3>
+            {% if user.is_authenticated and listing.buyer == None %}
+            <form action={% url 'addComment' name=listing.title %} method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="user" value={{user}}>
+                <input class="text" type="text" name="message" id="comment" placeholder="Comment">
+                <input class="btn" type="submit" value="Add Comment">
+            </form>
+            {% endif %}
+            
+            <!-- Displaying previous comments -->
+            {% for comment in comments%}
+            <div class="comment">
+                <h5>{{comment.commented_by}}</h5>
+                <p>{{comment.message}}</p>
+                <sub>{{comment.date_time}}</sub>
+            </div>
+            {% empty %}
+                <p class="value">No comments yet!</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

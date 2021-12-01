@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Auctions{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'auctions/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div id = 'head'>
+      <div id='title'>
+        <h1 id='Site-name'>Auctions</h1>
+        <div id='user'>
+          {% if user.is_authenticated %} Signed in as
+          <strong>{{ user.username }}</strong>.
+          {% else %} 
+          Not signed in.
+          {% endif %}
+        </div>
+      </div>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+        </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'listCategories' %}">Category</a>
+          </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+              <a class="nav-link" href="{% url 'showWatchlist' %}">Watchlist</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'createListing' %}">Create Listing</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+          </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <!-- <hr /> -->
+    <div id="page">
+      {% block body %} {% endblock %}
+    </div>
+  </body>
+</html>
